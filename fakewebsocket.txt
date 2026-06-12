@@ -1,0 +1,64 @@
+import { useEffect, useState } from "react";
+
+export default function FakeWebSocket() {
+  const [connected, setConnected] = useState(false);
+  const [status, setStatus] = useState("Disconnected");
+  const [messages, setMessages] = useState([]);
+
+  // 1. CONNECT / DISCONNECT SIMULATION
+  useEffect(() => {
+    let connectTimer;
+
+    if (connected) {
+      setStatus("Connecting...");
+
+      connectTimer = setTimeout(() => {
+        setStatus("Connected");
+      }, 2000);
+    } else {
+      setStatus("Disconnected");
+      setMessages([]); // reset data when disconnected
+    }
+
+    return () => {
+      clearTimeout(connectTimer);
+    };
+  }, [connected]);
+
+  // 2. FAKE LIVE DATA STREAM (like WebSocket messages)
+  useEffect(() => {
+    if (!connected || status !== "Connected") return;
+
+    const interval = setInterval(() => {
+      const newMessage = {
+        id: Date.now(),
+        text: "Message " + Math.floor(Math.random() * 100),
+      };
+
+      setMessages((prev) => [...prev, newMessage]);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [connected, status]);
+
+  return (
+    <div style={{ fontFamily: "sans-serif" }}>
+        <h2>Fake WebSocket Demo</h2>
+
+      <p>Status: {status}</p>
+
+      <button onClick={() => setConnected((prev) => !prev)}>
+        {connected ? "Disconnect" : "Connect"}
+      </button>
+
+      <h3>Messages:</h3>
+      <ul>
+        {messages.map((msg) => (
+          <li key={msg.id}>{msg.text}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}

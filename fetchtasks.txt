@@ -1,0 +1,140 @@
+// task1
+        const fetchData = () => {
+            fetch("https://jsonplaceholder.typicode.com/posts")
+            .then(res => res.json())
+            .then(data => {
+                data.map(i=> console.log(i.title))
+            })            
+        }
+
+        fetchData();
+
+
+        // task2
+        const fetchData  = async () => {
+            const res = await fetch("https://jsonplaceholder.typicode.com/posts")
+            const data = await res.json();
+            data.map(i=> console.log(i.title))
+        }
+
+        fetchData()
+
+
+        // task 3
+        const fetchData  = async () => {
+            try{
+                const res =  await fetch("https://jsonplaceholder.typicode.com/posts/1")
+                if(!res.ok) throw new Error ("Post Error")
+                const data = await res.json();
+                console.log(data.body)
+            }
+            catch(error){
+                console.log(`NetWork error: ${error}`)
+            }
+        }
+
+        fetchData()
+
+
+        // task 4
+        const fetchData  = () => {
+            fetch("https://jsonplaceholder.typicode.com/posts/1")
+            .then(res => {
+                if(!res.ok) throw new Error ("Post Error")                
+                return res.json();
+            })
+            .then(data=> console.log(data))
+            .catch(error=>{
+                console.log(`Error: ${error}`)
+            })
+
+
+            fetch("https://jsonplaceholder.typicode.com/users/1")
+            .then(res => {
+                if(!res.ok) throw new Error("User Error");
+                return res.json();
+            })
+            .then(data=> console.log(data))
+            .catch(error=>{
+                console.log(`Error: ${error}`)
+            })
+
+        }
+
+        fetchData()
+
+
+
+        // task 6
+        const fetchData  = async () => {
+            try{
+                const res = await fetch("https://jsonplaceholder.typicode.com/posts")
+                if(!res.ok) throw new Error("post error");
+                const data = await res.json();
+                console.log(data)
+                data.map(i=>{
+                    if(i.userId===1){
+                        console.log(i.title)
+                    }
+                })
+            }
+            catch(error){
+                console.log(`Network Error: ${error}`)
+            }
+
+        }
+
+        fetchData()
+
+
+
+// task 7,8
+        const fetchData  = async () => {
+            try{
+                const fetchPost = await fetch("https://jsonplaceholder.typicode.com/posts")
+                if(!fetchPost.ok) throw new Error("post error");
+                const postData = await fetchPost.json();
+                console.log(postData[0].id)
+                const id = postData[0].id;
+
+                const fetchComments = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+                if(!fetchComments.ok) throw new Error("Comment Error")
+                const commentsData = await fetchComments.json();
+                console.log(commentsData);
+            }
+            catch(error){
+                console.log(`Network Error: ${error}`)
+            }
+
+        }
+
+        fetchData()
+
+
+
+
+                const fetchData  = async () => {
+            try{
+                console.time("fetch time");
+                const fetchPost = await fetch("https://jsonplaceholder.typicode.com/posts")
+                if(!fetchPost.ok) throw new Error("post error");
+                const postData = await fetchPost.json();
+                console.timeEnd("fetch time");
+                setTimeout(()=>{
+                    console.log(postData[0].id)
+                },1000)
+                const id = postData[0].id;
+
+                const fetchComments = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+                if(!fetchComments.ok) throw new Error("Comment Error")
+                const commentsData = await fetchComments.json();
+                console.log(commentsData);
+            }
+            catch(error){
+                console.log(`Network Error: ${error}`)
+            }
+
+        }
+
+        fetchData()
+

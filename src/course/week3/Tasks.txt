@@ -1,0 +1,125 @@
+
+// Task 1
+import {useEffect} from 'react';
+const UseEffect = () =>{
+    useEffect(()=>{
+        console.log("Mounted")
+    }, [])
+    
+    return (
+        <div>
+            Component Loaded
+        </div>
+    )
+}
+
+export default UseEffect;
+
+
+
+
+// Task 2
+import {useEffect, useState} from 'react';
+
+const UseEffect = () =>{
+
+    const [count, setCount] = useState(0)
+    useEffect(()=>{
+        console.log(`Count Changes, Current Count: ${count}`)
+    }, [count])
+    
+    return (
+        <div>
+            <button onClick={()=>setCount(prev => prev + 1)}>+</button>
+            <p>{count}</p>
+        </div>
+    )
+}
+
+export default UseEffect;
+
+
+
+// task 3
+
+import { useEffect, useState } from "react";
+
+const UseEffect = () => {
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            console.log("Ticked")
+        }, 1000)
+
+        return () => {
+            clearInterval(timer);
+        }
+
+    }, [])
+
+    return(
+        <p>
+            Hello WOrld
+        </p>
+    )
+}
+
+export default UseEffect;
+
+
+
+// task 4
+
+import {useState, useEffect} from 'react';
+
+const UseEffect = () =>{
+
+    const [search, setSearch] = useState("")
+
+    useEffect(()=>{
+        if(search===""){
+            return
+        }
+        console.log(`Searched for: ${search}`)
+    },[search])
+
+    return (
+        <div>
+            <p>Hello You Searched for: {search}</p>
+            <input type="text" value={search} onChange={(e)=>setSearch(e.target.value)} placeholder='search someting' />
+
+        </div>
+    )
+}
+
+export default UseEffect;
+
+
+Task 5
+the bug on task5 is that it will not console.log the latest user.name. on first render what username was it will log that and thats it even if the props is changed it wont log new value
+
+Task6
+cleanup function is mandatory if inside useeffect we do something that keeps on running
+cleanup function runs before rerendering and when component unmounts. 
+before rerendering and before component unmounts.
+
+
+task7
+1. no
+2. yes
+3. yes
+4. no
+
+task8
+the dependency array is correct too because we dont want data fetching to run again and agian it could make the site slow.
+the consequentes however will be that we wont get the latest data.
+
+
+
+Next step to level up:
+
+useEffect with async functions (fetch API + cleanup)
+
+Avoiding infinite loops
+
+Complex dependencies (objects & arrays)

@@ -1,0 +1,65 @@
+🏗️ React Practice Project: Mini E-commerce Dashboard
+
+We’ll simulate a small e-commerce UI with products, cart, and a simple form.
+
+# Task 1: JSX Deep Understanding
+ - Create a ProductCard component that shows:
+ - Product name, price, and stock status
+ - Use conditional rendering to show “Out of stock” if stock === 0
+ - Render a list of products dynamically using map
+ - Use Fragments (<> </>) so that the component can return multiple elements
+ - Bonus: Use short-circuiting to display optional product discount only if it exists
+
+# Example Output:
+ - Product: iPhone 15
+ - Price: $999
+ - Status: In Stock
+ - Discount: 10%
+
+# Task 2: Props & State
+ - Create a parent component ProductList which has an array of products in state
+ - Pass product data to child component ProductCard via props
+ - Add a “Add to Cart” button in ProductCard
+ - Handle child to parent communication: when clicked, add product to a cart array in ProductList state
+ - Controlled vs uncontrolled:
+ - Create a search input to filter products
+ - Make it controlled by state
+
+# Task 3: Component Lifecycle with Hooks
+ - In ProductList, simulate loading products from API using useEffect + setTimeout
+ - Show a loading spinner while products are being fetched
+ - Add cleanup function in useEffect to clear setTimeout if component unmounts
+ - Bonus: Show a message when a product is added to cart using another state that resets after 2 seconds (another useEffect)
+
+# Task 4: Forms and Input Handling
+ * Create a checkout form with:
+ - Name, Email, Address
+ - Quantity input for cart items
+ - Handle inputs using controlled components
+ - Add basic validation:
+ - Name must not be empty
+ - Email must contain “@”
+ - Quantity must be greater than 0
+ - Show error messages dynamically using conditional rendering
+
+# Task 5: Component Design (Smart vs Dumb, Reusability, DRY)
+ * Break UI into small components:
+ - ProductCard → dumb
+ - CartItem → dumb
+ - Button → reusable component for “Add to Cart” / “Remove”
+ - ProductList → smart (handles products and cart state)
+ - CheckoutForm → smart (handles form state and validation)
+
+# Make sure no repeated code:
+ - All buttons should use the Button component
+ - All input fields should use a reusable Input component
+ - Use props to customize components (labels, onClick functions, etc.)
+
+✅ Expected Outcomes
+ - After completing this, you will be able to:
+ - Render dynamic lists and conditional UI
+ - Pass data between parent and child components
+ - Handle state changes and controlled inputs
+ - Use useEffect for lifecycle behavior and cleanup
+ - Build smart/dumb components and reusable components
+ - Apply DRY principle and good React component design
