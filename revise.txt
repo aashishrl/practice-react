@@ -525,5 +525,87 @@ export default Revise;
 
 
 Task16
+import {useState} from 'react';
+const Dashboard = () => {
+    const [task, setTask] = useState("")
+    const [taskList, setTaskList] = useState([])
+    const handleClick= () => {
+        if(task.trim()==="") return;
+        const newTask = {
+            id: Date.now(),
+            name: task,
+            status: false
+        }
+
+        setTaskList(prev=>(
+            [...prev, newTask]
+        ));
+        setTask("");        
+    }
+
+    const handleChange = (id) => {
+        setTaskList(prev=>
+            prev.map(task=>
+                task.id===id?
+                {...task,status: !task.status}:
+                task
+            )
+        )
+    }
+
+    const deleteTask = (id) => {
+        setTaskList(prev=>
+            prev.filter(task=>task.id!==id)                
+        )
+    }
+
+    const completeTask = taskList.filter(task=> task.status).length;
+    const inCompleteTask = taskList.length - completeTask;
+
+    return (
+        <div>
+            <div className='flex gap-2'>
+                <input className='py-1 px-2' type="text" value={task} onChange={(e)=>setTask(e.target.value)}
+                    onKeyDown={(e)=>{
+                        if(e.key==="Enter"){
+                            handleClick();
+                        }
+                    }}
+                />
+                <button onClick={handleClick}>Add Task</button>
+            </div>
+
+            <div className="w-3xl mt-6 p-4 border border-amber-200">
+                {taskList.map((i)=>(
+                    <div key={i.id} className="flex gap-2 items-center justify-between">
+                        <div className='flex gap-2 items-center'>
+                            <input type="checkbox" checked={i.status} 
+                                onChange={()=>handleChange(i.id)}/>
+                            <p className={i.status?"line-through":""}>{i.name}</p>                        
+                        </div>
+                        <button onClick={()=>deleteTask(i.id)}>Delete Task</button>
+                    </div>
+                ))}
+            </div>
+            <div className='p-4 mt-6 bg-amber-500'>
+                <p className='text-white'>
+                    Total Tasks: 
+                    <span className='font-bold'>{taskList.length}</span>
+                </p>
+                <p className='text-white'>
+                    Complete Tasks: 
+                    <span className='font-bold'>{completeTask}</span>
+                </p>
+                <p className='text-white'>
+                    InComplete Tasks: 
+                    <span className='font-bold'>{inCompleteTask}</span>
+                </p>
+            </div>
+        </div>
+    )
+}
+export default Dashboard;
+
+
 
 
