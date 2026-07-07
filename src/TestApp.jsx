@@ -9,6 +9,7 @@ import WebSocketPractice from './practice/WebSocketPractice';
 import UseRef from './practice/UseRef';
 import UseMemo from './practice/UseMemo';
 import Revise from './practice/revise/Revise';
+import Fetching from './projects/fetch/Fetching';
 
 const TestApp = () => {
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ const TestApp = () => {
         <Routes>        
           {/* <Route path="/" element={<UseMemo />} />
           <Route path="/" element={<UseRef />} /> */}
+          <Route path="/" element={<Fetching/>} />
           <Route path="/" element={<Revise/>} />
           {/* <Route path="/" element={<LiveCryptoDashboard />} /> */}
           <Route path="/websocket-practice" element={<WebSocketPractice />} />
