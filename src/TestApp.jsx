@@ -11,6 +11,7 @@ import UseMemo from './practice/UseMemo';
 import Revise from './practice/revise/Revise';
 import Fetching from './projects/fetch/Fetching';
 import FetchApp from './FetchApp';
+import FetchApp1 from './FetchApp1';
 
 const TestApp = () => {
   const [loading, setLoading] = useState(true);
@@ -35,7 +36,8 @@ const TestApp = () => {
         <Routes>        
           {/* <Route path="/" element={<UseMemo />} />
           <Route path="/" element={<UseRef />} /> */}
-          <Route path="/" element={<FetchApp/>} />
+          {/* <Route path="/" element={<FetchApp1/>} />
+          <Route path="/" element={<FetchApp/>} /> */}
           <Route path="/" element={<Fetching/>} />
           <Route path="/" element={<Revise/>} />
           {/* <Route path="/" element={<LiveCryptoDashboard />} /> */}

@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 
 const Fetching = () => {
+    const [add, setAdd] = useState("")
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [data, setData] = useState([]);
@@ -46,6 +47,11 @@ const Fetching = () => {
         )
     }
     
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        console.log(add)
+    }
     
     return (
         <>
@@ -54,7 +60,13 @@ const Fetching = () => {
                 <input type="text" placeholder='search user' />
             </div>
             <FetchingGroup/>
-            
+            <div>
+                <h2>Add User</h2>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" value={add} onChange={(e)=>setAdd(e.target.value)}/>
+                    <button>Add User</button>
+                </form>
+            </div>
         </>
     )
 }
